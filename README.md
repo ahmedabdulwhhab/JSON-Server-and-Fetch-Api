@@ -20,3 +20,6 @@ my aim was to understand the fetch GET and POST using a server using json format
 so you can find HTML file for javascript
 
 and python file for server with output json format
+
+the following link is an explanation for it in arabic language
+https://youtu.be/NRkCY-fe-Ok
