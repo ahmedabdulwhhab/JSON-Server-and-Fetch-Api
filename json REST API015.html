@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<! 
+ sudo  fuser -k 6633/tcp
+ /home/ubuntu/sdn_controllers/pox_json/pox-jsonrest/pox.py log.level --DEBUG --verbose samples.pretty_log  forwarding.l2_pairs info.packet_dump openflow.webservice web.webcore --port=8082
+>
+<html>
+<head>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ 
+<input id="title" type="text" value= "Python Book" </input>
+<input id="author" type="text" value="Karim " </input>
+
+<ol>
+<li>  
+	<button id="button1" onclick="XMLHttpRequest_get()">Get Data from Server Via XMLHttpRequest</button>
+	<p id="includedContent1"> demo 1</p>
+</li>
+<!------------------------------------------------>
+<li>  
+	<button id="button2" onclick="XMLHttpRequest_post()"> Post Data to server Via XMLHttpRequest </button>
+	<p id="includedContent2"> demo 2</p>
+</li>
+
+<li>  
+	<button id="button1" onclick="fetch_Get()">Get Data from Server Via fetch</button>
+	<p id="includedContent1">demo 3</p>
+</li>
+<!------------------------------------------------>
+<li>  
+	<button id="button2" onclick="fetch_Post()"> Post Data to server Via fetch </button>
+	<p id="includedContent2"> demo 4</p>
+</li>
+</ol>
+
+<h1>Authors</h1>
+<ul id="authors"></ul>
+</head>
+<body>
+<p> Test JSON, Please Run Console.log via Ctrl +shift + i </p>
+</body>
+<script>
+
+
+////////////////////////////////////////////////////////
+////////// Method 1
+// function to handle success
+function success() {
+    var data = JSON.parse(this.responseText); //parse the string to JSON
+	var count = Object.keys(data["results"]).length;
+  console.log("Length of Json objects are ",count);
+  for( i=0;i<count;i++)
+	console.log('data[%d]',i, data["results"][i])
+}
+
+// function to handle error
+function error(err) {
+    console.log('Request Failed', err); //error details will be in the "err" object
+}
+function XMLHttpRequest_get() 
+{
+var xhr = new XMLHttpRequest(); //invoke a new instance of the XMLHttpRequest
+xhr.onload = success; // call success function if request is successful
+xhr.onerror = error;  // call error function if request failed
+xhr.open('GET', 'http://192.168.1.11:8082/time'); // open a GET request
+xhr.send(); // send the request to the server.
+}
+
+
+
+//function_post()
+// function to handle success
+function successpost() {
+
+	console.log('Successful Post')
+}
+function XMLHttpRequest_post() 
+{
+        // Form fields, see IDs above
+
+
+		const data = {
+		"title": document.querySelector('#title').value,
+		"body": "Lorem ipsum dolor sit amet.",
+		"author": document.querySelector('#author').value,
+		"date_ms": 1593607500000
+		}
+		
+        const http = new XMLHttpRequest()
+		http.onload = successpost; // call success function if request is successful
+        http.open('POST', 'http://192.168.1.11:8082')
+        http.setRequestHeader('Content-type', 'application/json')
+        http.send(JSON.stringify(data)) // Make sure to stringify
+
+}
+
+//https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-fetch-api-to-get-data#:~:text=%20How%20To%20Use%20the%20JavaScript%20Fetch%20API,requests%2C%20but%20you%20can%20use%20all...%20More%20
+
+function fetch_Get()
+{
+const ul = document.getElementById('authors');
+const url = 'http://192.168.1.11:8082';
+
+fetch(url,{})
+.then((resp) => resp.json())
+.then(function(data) {
+
+	var count = Object.keys(data["results"]).length;
+  console.log("Length of Json objects are ",count);
+  for( i=0;i<count;i++)
+	console.log('data[%d]',i, data["results"][i])
+  })
+
+.catch(function(error) {
+  console.log(error);
+});
+
+}
+function fetch_Post()
+{
+const url = 'http://192.168.1.11:8082';
+
+let data = {
+		"title": document.querySelector('#title').value,
+		"body": "Lorem ipsum dolor sit amet.",
+		"author": document.querySelector('#author').value,
+		"date_ms": 1593607500000
+}
+
+var request = new Request(url, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {'Content-type': 'application/json'}
+});
+
+fetch(request)
+.then(function() {
+    // Handle response we get from the API
+	console.log("Successful fetch")
+})
+}
+</script>
+</body>
+</html>
