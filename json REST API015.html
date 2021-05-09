@@ -23,12 +23,12 @@
 </li>
 
 <li>  
-	<button id="button1" onclick="fetch_Get()">Get Data from Server Via fetch</button>
+	<button id="button3" onclick="fetch_Get()">Get Data from Server Via fetch</button>
 	<p id="includedContent1">demo 3</p>
 </li>
 <!------------------------------------------------>
 <li>  
-	<button id="button2" onclick="fetch_Post()"> Post Data to server Via fetch </button>
+	<button id="button4" onclick="fetch_Post()"> Post Data to server Via fetch </button>
 	<p id="includedContent2"> demo 4</p>
 </li>
 </ol>
@@ -72,7 +72,7 @@ xhr.send(); // send the request to the server.
 // function to handle success
 function successpost() {
 
-	console.log('Successful Post')
+	console.log('Successful Post via XMLHttpRequest_post')
 }
 function XMLHttpRequest_post() 
 {
@@ -136,7 +136,7 @@ var request = new Request(url, {
 fetch(request)
 .then(function() {
     // Handle response we get from the API
-	console.log("Successful fetch")
+	console.log("Successful Post via fetch")
 })
 }
 </script>
