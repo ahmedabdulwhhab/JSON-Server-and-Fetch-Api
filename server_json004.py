@@ -7,7 +7,7 @@ mfickett commented on Jul 14, 2020
 
 
  sudo  fuser -k 8082/tcp
- python3 server_json003.py 8082
+ python3 server_json004.py 8082
  curl http://192.168.1.11:8082
 
 
