@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <! 
  sudo  fuser -k 6633/tcp
- /home/ubuntu/sdn_controllers/pox_json/pox-jsonrest/pox.py log.level --DEBUG --verbose samples.pretty_log  forwarding.l2_pairs info.packet_dump openflow.webservice web.webcore --port=8082
+ 
 >
 <html>
 <head>
@@ -62,7 +62,7 @@ function XMLHttpRequest_get()
 var xhr = new XMLHttpRequest(); //invoke a new instance of the XMLHttpRequest
 xhr.onload = success; // call success function if request is successful
 xhr.onerror = error;  // call error function if request failed
-xhr.open('GET', 'http://192.168.1.11:8082/time'); // open a GET request
+xhr.open('GET', 'http://192.168.1.11:8082'); // open a GET request
 xhr.send(); // send the request to the server.
 }
 
