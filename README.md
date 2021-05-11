@@ -15,11 +15,40 @@ comment
 mfickett commented on Jul 14, 2020
 with some modifications.
 
+
+# in Rev003
+assuming Linux Machine has IP address 192.168.1.11
 my aim was to understand the fetch GET and POST using a server using json format.
 
 so you can find HTML file for javascript
 
 and python file for server with output json format
-
+the HTML code is existed under json_REST_API015.html
 the following link is an explanation for it in arabic language
 https://youtu.be/NRkCY-fe-Ok
+
+
+# in Rev004
+assuming Linux Machine has IP address 192.168.1.11
+to request time from server 
+curl http://192.168.1.11:8082/time
+or 
+use browser
+http://192.168.1.11:8082/time
+
+to request date from server 
+curl http://192.168.1.11:8082/date
+or 
+use browser
+http://192.168.1.11:8082/date
+
+
+to get json data
+use
+curl http://192.168.1.11:8082
+or 
+use browser
+http://192.168.1.11:8082
+
+
+or 
