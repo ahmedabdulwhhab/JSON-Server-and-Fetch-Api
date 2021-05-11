@@ -16,7 +16,7 @@ mfickett commented on Jul 14, 2020
 with some modifications.
 
 
-# in Rev003
+# In Rev003
 assuming Linux Machine has IP address 192.168.1.11
 my aim was to understand the fetch GET and POST using a server using json format.
 
@@ -28,7 +28,7 @@ the following link is an explanation for it in arabic language
 https://youtu.be/NRkCY-fe-Ok
 
 
-# in Rev004
+# In Rev004
 assuming Linux Machine has IP address 192.168.1.11
 to request time from server 
 curl http://192.168.1.11:8082/time
@@ -51,4 +51,3 @@ use browser
 http://192.168.1.11:8082
 
 
-or 
