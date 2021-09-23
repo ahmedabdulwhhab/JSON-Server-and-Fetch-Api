@@ -1,0 +1,163 @@
+
+Function Excel_search_Engine()
+'
+' Macro1 Macro
+'
+
+'
+'    Application.Goto Reference:="Macro1"
+'
+' Macro1 Macro
+'
+
+''''''''''''' Get Full Description ''''''''''''''''''''''''
+''''''''''''' SOURCE ''''''''''''''''
+'
+' Macro1 Macro
+'
+
+''''''''''''' SERIAL NO. ''''''''''''''''''''''''
+''''''''''''' SOURCE ''''''''''''''''
+Recent_On_Hand_Sheet_Name = "Sheet1"
+Missing_Data_Sheet_Name = "Sheet1"
+UserForm1.ListBox1.Clear
+
+
+word1 = UserForm1.TextBox1
+word2 = UserForm1.TextBox2
+word3 = UserForm1.TextBox3
+word4 = UserForm1.TextBox4
+word5 = UserForm1.TextBox5
+word6 = UserForm1.TextBox6
+word7 = UserForm1.TextBox7
+word8 = UserForm1.TextBox8
+
+
+'''''''' Word 1 and Word 2 should be Empty''''''''''
+word11 = UserForm1.TextBox11
+word12 = UserForm1.TextBox12
+word13 = UserForm1.TextBox13
+'If (Len(word11) = 0) Then word11 = " "
+'If (Len(word12) = 0) Then word12 = " "
+
+source_col = 0
+destination_col = 1
+index_current_cell = 1
+    'Sheets.Add After:=ActiveSheet
+    'Worksheets(Missing_Data_Sheet_Name).Range("F1").Value = "Search Result"
+    For Each Missing_Data_Sheet_1 In Worksheets(Missing_Data_Sheet_Name).Range("F2:F58564")
+        index_current_cell = index_current_cell + 1
+        GET_ITEM_TO_SEARCH = UCase(Missing_Data_Sheet_1.Value)
+        destination_col = destination_col + 1
+        source_col = 0
+        If (Missing_Data_Sheet_1.Value) = "" Then
+            GoTo 1010
+        End If
+        
+        xx = InStr(1, GET_ITEM_TO_SEARCH, UCase(word11))
+        If (InStr(1, GET_ITEM_TO_SEARCH, UCase(word1)) > 0) Then
+            If (InStr(1, GET_ITEM_TO_SEARCH, UCase(word2)) > 0) Then
+                If (InStr(1, GET_ITEM_TO_SEARCH, UCase(word3)) > 0) Then
+                    If (InStr(1, GET_ITEM_TO_SEARCH, UCase(word4)) > 0) Then
+                        If (InStr(1, GET_ITEM_TO_SEARCH, UCase(word5)) > 0) Then
+                            If (InStr(1, GET_ITEM_TO_SEARCH, UCase(word6)) > 0) Then
+                                If (InStr(1, GET_ITEM_TO_SEARCH, UCase(word7)) > 0) Then
+                                    If (InStr(1, GET_ITEM_TO_SEARCH, UCase(word8)) > 0) Then
+                                        If ((Len(word11) = 0) Or (InStr(1, GET_ITEM_TO_SEARCH, UCase(word11)) = 0)) Then
+                                            If ((Len(word12) = 0) Or (InStr(1, GET_ITEM_TO_SEARCH, UCase(word12)) = 0)) Then
+                                                If ((Len(word13) = 0) Or (InStr(1, GET_ITEM_TO_SEARCH, UCase(word13)) = 0)) Then
+                                                    'MsgBox InStr(1, GET_ITEM_TO_SEARCH, UCase(word12))
+                                                    UserForm1.ListBox1.AddItem ("F" & index_current_cell) + "              " + Worksheets(Missing_Data_Sheet_Name).Range("C" & index_current_cell).Value + "   " + Mid(Worksheets(Missing_Data_Sheet_Name).Range("E" & index_current_cell).Value, 1, 45)
+                                                End If
+                                            End If
+                                        End If
+                                    End If
+                                End If
+                             End If
+                         End If
+                     End If
+                End If
+            End If
+        End If
+        
+        
+        
+
+    Next Missing_Data_Sheet_1
+1010:
+'''''''''''''''''''''''''''''''''''''''''''''''''''
+''''' Save Current Criteria
+Worksheets("Latest Search Criteria").Range("A1").Value = "With"
+Worksheets("Latest Search Criteria").Range("A2").Value = UserForm1.TextBox1.Value
+Worksheets("Latest Search Criteria").Range("A3").Value = UserForm1.TextBox2.Value
+Worksheets("Latest Search Criteria").Range("A4").Value = UserForm1.TextBox3.Value
+Worksheets("Latest Search Criteria").Range("A5").Value = UserForm1.TextBox4.Value
+Worksheets("Latest Search Criteria").Range("A6").Value = UserForm1.TextBox5.Value
+Worksheets("Latest Search Criteria").Range("A7").Value = UserForm1.TextBox6.Value
+Worksheets("Latest Search Criteria").Range("A8").Value = UserForm1.TextBox7.Value
+Worksheets("Latest Search Criteria").Range("A9").Value = UserForm1.TextBox8.Value
+
+Worksheets("Latest Search Criteria").Range("B1").Value = "Without"
+Worksheets("Latest Search Criteria").Range("B2").Value = UserForm1.TextBox11.Value
+Worksheets("Latest Search Criteria").Range("B3").Value = UserForm1.TextBox12.Value
+Worksheets("Latest Search Criteria").Range("B4").Value = UserForm1.TextBox13.Value
+
+
+
+
+End Function
+Private Sub CMDSearch_Click()
+Excel_search_Engine
+End Sub
+
+Private Sub CommandButton2_Click()
+UserForm1.TextBox1 = ""
+UserForm1.TextBox2 = ""
+UserForm1.TextBox3 = ""
+UserForm1.TextBox4 = ""
+UserForm1.TextBox5 = ""
+UserForm1.TextBox6 = ""
+UserForm1.TextBox7 = ""
+UserForm1.TextBox8 = ""
+UserForm1.TextBox11 = ""
+UserForm1.TextBox12 = ""
+UserForm1.TextBox13 = ""
+UserForm1.TextBox21 = ""
+UserForm1.TextBox22 = ""
+UserForm1.ListBox1.Clear
+
+End Sub
+
+Private Sub ListBox1_Click()
+a = ListBox1.ListIndex
+'MsgBox (ListBox1.List(a))
+Worksheets("Sheet1").Range(Mid(ListBox1.List(a), 1, 10)).Select
+UserForm1.TextBox21 = Worksheets("Sheet1").Range("D" & Mid(ListBox1.List(a), 2, 10))
+UserForm1.TextBox22 = Worksheets("Sheet1").Range("G" & Mid(ListBox1.List(a), 2, 10))
+
+UserForm1.TextBox23.Text = Worksheets("Sheet1").Range("F" & Mid(ListBox1.List(a), 2, 10))
+
+
+End Sub
+
+
+Private Sub UserForm_Initialize()
+    ListBox1.MultiSelect = 0
+    
+    ' Upload latest criteria
+UserForm1.TextBox1.Value = Worksheets("Latest Search Criteria").Range("A2").Value
+UserForm1.TextBox2.Value = Worksheets("Latest Search Criteria").Range("A3").Value
+UserForm1.TextBox3.Value = Worksheets("Latest Search Criteria").Range("A4").Value
+UserForm1.TextBox4.Value = Worksheets("Latest Search Criteria").Range("A5").Value
+UserForm1.TextBox5.Value = Worksheets("Latest Search Criteria").Range("A6").Value
+UserForm1.TextBox6.Value = Worksheets("Latest Search Criteria").Range("A7").Value
+UserForm1.TextBox7.Value = Worksheets("Latest Search Criteria").Range("A8").Value
+UserForm1.TextBox8.Value = Worksheets("Latest Search Criteria").Range("A9").Value
+
+
+UserForm1.TextBox11.Value = Worksheets("Latest Search Criteria").Range("B2").Value
+UserForm1.TextBox12.Value = Worksheets("Latest Search Criteria").Range("B3").Value
+UserForm1.TextBox13.Value = Worksheets("Latest Search Criteria").Range("B4").Value
+
+    Excel_search_Engine
+End Sub
